@@ -17,6 +17,7 @@
 		4908754522F8D2E700EFD80F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908754422F8D2E700EFD80F /* Model.swift */; };
 		4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908754C22F8D8F400EFD80F /* ListCell.swift */; };
 		4908754F22F8D8F400EFD80F /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4908754D22F8D8F400EFD80F /* ListCell.xib */; };
+		4908755222F8F0D700EFD80F /* UIImage+AverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4908754422F8D2E700EFD80F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		4908754C22F8D8F400EFD80F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		4908754D22F8D8F400EFD80F /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AverageColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		4908752222F8C5BB00EFD80F /* TransitionAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				4908755022F8F0B200EFD80F /* Extensions */,
 				4908754122F8D1E300EFD80F /* Models */,
 				4908754922F8D62B00EFD80F /* Views */,
 				4908753722F8C62400EFD80F /* Controllers */,
@@ -125,6 +128,14 @@
 				4908754D22F8D8F400EFD80F /* ListCell.xib */,
 			);
 			path = DetailCell;
+			sourceTree = "<group>";
+		};
+		4908755022F8F0B200EFD80F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 				4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */,
 				4908754022F8CEEF00EFD80F /* ListDataSource.swift in Sources */,
 				4908752422F8C5BB00EFD80F /* AppDelegate.swift in Sources */,
+				4908755222F8F0D700EFD80F /* UIImage+AverageColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
