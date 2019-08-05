@@ -15,6 +15,8 @@
 		4908753B22F8C64300EFD80F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908753A22F8C64300EFD80F /* DetailViewController.swift */; };
 		4908754022F8CEEF00EFD80F /* ListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908753F22F8CEEF00EFD80F /* ListDataSource.swift */; };
 		4908754522F8D2E700EFD80F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908754422F8D2E700EFD80F /* Model.swift */; };
+		4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908754C22F8D8F400EFD80F /* ListCell.swift */; };
+		4908754F22F8D8F400EFD80F /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4908754D22F8D8F400EFD80F /* ListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		4908753A22F8C64300EFD80F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4908753F22F8CEEF00EFD80F /* ListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataSource.swift; sourceTree = "<group>"; };
 		4908754422F8D2E700EFD80F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4908754C22F8D8F400EFD80F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		4908754D22F8D8F400EFD80F /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,8 @@
 		4908754B22F8D65200EFD80F /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				4908754C22F8D8F400EFD80F /* ListCell.swift */,
+				4908754D22F8D8F400EFD80F /* ListCell.xib */,
 			);
 			path = DetailCell;
 			sourceTree = "<group>";
@@ -180,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4908753022F8C5BB00EFD80F /* LaunchScreen.storyboard in Resources */,
+				4908754F22F8D8F400EFD80F /* ListCell.xib in Resources */,
 				4908752D22F8C5BB00EFD80F /* Assets.xcassets in Resources */,
 				4908752B22F8C5BB00EFD80F /* Main.storyboard in Resources */,
 			);
@@ -195,6 +202,7 @@
 				4908754522F8D2E700EFD80F /* Model.swift in Sources */,
 				4908753B22F8C64300EFD80F /* DetailViewController.swift in Sources */,
 				4908753922F8C63600EFD80F /* ListViewController.swift in Sources */,
+				4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */,
 				4908754022F8CEEF00EFD80F /* ListDataSource.swift in Sources */,
 				4908752422F8C5BB00EFD80F /* AppDelegate.swift in Sources */,
 			);
