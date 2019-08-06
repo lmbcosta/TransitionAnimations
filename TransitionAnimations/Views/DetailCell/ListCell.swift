@@ -10,12 +10,17 @@ import UIKit
 
 class ListCell: UICollectionViewCell {
     
+    static let identifier = "ListCell"
+    
     // UI
+    @IBOutlet private weak var containerView: UIView!
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.numberOfLines = 0
             titleLabel.textAlignment = .left
             titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+            titleLabel.textColor = .white
         }
     }
     
@@ -24,6 +29,7 @@ class ListCell: UICollectionViewCell {
             subtitleLabel.numberOfLines = 0
             subtitleLabel.textAlignment = .left
             subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            subtitleLabel.textColor = .white
         }
     }
     
@@ -32,7 +38,9 @@ class ListCell: UICollectionViewCell {
     }
     
     @IBOutlet private weak var bgImageView: UIImageView! {
-        didSet { bgImageView.contentMode = .scaleAspectFill }
+        didSet { bgImageView.contentMode = .scaleAspectFill
+            bgImageView.backgroundColor = .clear
+        }
     }
     
     private var shadowColor: UIColor?
@@ -47,20 +55,23 @@ class ListCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // Add shadow on cell
-        backgroundColor = .clear // very important
-        layer.masksToBounds = false
-        layer.shadowOpacity = 0.23
-        layer.shadowRadius = 4
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        if let shadowColor = shadowColor { layer.shadowColor = shadowColor.cgColor }
-        
-        // Add corner radius on ContentView
-        contentView.layer.cornerRadius = 8
+        if let shadowColor = shadowColor {
+            containerView.layer.shadowColor = shadowColor.cgColor
+            containerView.layer.backgroundColor = UIColor.clear.cgColor
+            containerView.layer.shadowOffset = CGSize(width: 0, height: -1.0)
+            containerView.layer.shadowRadius = 12.0
+            containerView.layer.shadowOpacity = 0.8
+            containerView.layer.masksToBounds = false
+            containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.layer.bounds, cornerRadius: 12.0).cgPath
+            
+            bgImageView.layer.cornerRadius = 12.0
+            bgImageView.layer.masksToBounds = true
+        }
     }
+
     
     // MAK: - Public Functions
-    func configure(title: String, subTitle: String, image: UIImage) {
+    func configure(title: String, subTitle: String, image: UIImage, color: UIColor) {
         titleLabel.text = title
         subtitleLabel.text = subTitle
         bgImageView.image = image

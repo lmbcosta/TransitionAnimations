@@ -15,15 +15,28 @@ class ListViewController: UIViewController {
     // UI
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
-            // TODO:
-           // collectionView.dataSource = listDataSource
+            collectionView.register(UINib(nibName: ListCell.identifier, bundle: nil), forCellWithReuseIdentifier: ListCell.identifier)
+            collectionView.dataSource = listDataSource
+            collectionView.delegate = self
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            collectionView.collectionViewLayout = layout
+            collectionView.bounces = false
+            collectionView.showsHorizontalScrollIndicator = false
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
         navigationController?.isNavigationBarHidden = true
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension ListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return .init(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
 }
