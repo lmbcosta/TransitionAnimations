@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListDataSource: NSObject, UICollectionViewDataSource {
+class ListDataSource: NSObject {
     private lazy var titles = [
         "Happy Title",
         "Angry Title",
@@ -17,7 +17,7 @@ class ListDataSource: NSObject, UICollectionViewDataSource {
     ]
     
     private lazy var subtitles = [
-        "Some people can’t believe in themselves until someone else believes in them first. Some people can’t believe in themselves until someone else believes in them first. Some people can’t believe in themselves until someone else believes in them first. Some people can’t believe in themselves until someone else believes in them first. Some people can’t believe in themselves until someone else believes in them first",
+        "Some people can’t believe in themselves until someone else believes in them first. Some people can’t believe in themselves until someone else believes in them first.",
         "It’s only after we’ve lost everything that we’re free to do anything.",
         "It is not our abilities that show what we truly are… it is our choices.",
         "Every man dies, not every man really lives."
@@ -31,9 +31,8 @@ class ListDataSource: NSObject, UICollectionViewDataSource {
         titles.shuffle()
         subtitles.shuffle()
         images.shuffle()
-        colors.shuffle()
         
-        (0..<4).forEach({ models.append(Model.List(title: titles[$0], subtitle: subtitles[$0], image: images[$0], color: colors[$0])) })
+        (0..<4).forEach({ models.append(Model.List(title: titles[$0], subtitle: subtitles[$0], image: images[$0], color: images[$0].averageColor)) })
     }
     
     private lazy var images: [UIImage] = {
@@ -42,8 +41,13 @@ class ListDataSource: NSObject, UICollectionViewDataSource {
         return array
     }()
     
-    private lazy var colors: [UIColor] = [.blue, .red, .yellow, .green]
-    
+    func requestModel(for index: Int) -> Model.List {
+        return models[index]
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension ListDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }

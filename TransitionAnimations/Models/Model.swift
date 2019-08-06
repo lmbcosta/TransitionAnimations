@@ -13,6 +13,6 @@ enum Model {
         let title: String
         let subtitle: String
         let image: UIImage
-        let color: UIColor
+        let color: UIColor?
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class ListViewController: UIViewController {
     
-    private lazy var listDataSource = ListDataSource()
+    private var listDataSource = ListDataSource()
     
     // UI
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -23,6 +23,7 @@ class ListViewController: UIViewController {
             collectionView.collectionViewLayout = layout
             collectionView.bounces = false
             collectionView.showsHorizontalScrollIndicator = false
+            collectionView.isPagingEnabled = true
         }
     }
 
@@ -38,5 +39,22 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return .init(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension ListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // Get Cell's containerView
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ListCell else { return }
+        guard let containerSuperView = cell.containerView.superview else { return }
+        
+        // Model
+        let model = listDataSource.requestModel(for: indexPath.item)
     }
 }

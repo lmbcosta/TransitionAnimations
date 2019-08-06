@@ -117,6 +117,8 @@
 		4908754A22F8D63D00EFD80F /* ListCell */ = {
 			isa = PBXGroup;
 			children = (
+				4908754C22F8D8F400EFD80F /* ListCell.swift */,
+				4908754D22F8D8F400EFD80F /* ListCell.xib */,
 			);
 			path = ListCell;
 			sourceTree = "<group>";
@@ -124,8 +126,6 @@
 		4908754B22F8D65200EFD80F /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
-				4908754C22F8D8F400EFD80F /* ListCell.swift */,
-				4908754D22F8D8F400EFD80F /* ListCell.xib */,
 			);
 			path = DetailCell;
 			sourceTree = "<group>";

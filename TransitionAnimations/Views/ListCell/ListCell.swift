@@ -13,7 +13,7 @@ class ListCell: UICollectionViewCell {
     static let identifier = "ListCell"
     
     // UI
-    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet weak var containerView: UIView!
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -34,7 +34,9 @@ class ListCell: UICollectionViewCell {
     }
     
     @IBOutlet private weak var titleView: UIView! {
-        didSet { titleView.backgroundColor = .clear }
+        didSet {
+            titleView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        }
     }
     
     @IBOutlet private weak var bgImageView: UIImageView! {
@@ -50,35 +52,56 @@ class ListCell: UICollectionViewCell {
         super.prepareForReuse()
         
         shadowColor = nil
+        titleView.layer.mask = nil
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if let shadowColor = shadowColor {
+            // Apply shadow
             containerView.layer.shadowColor = shadowColor.cgColor
             containerView.layer.backgroundColor = UIColor.clear.cgColor
-            containerView.layer.shadowOffset = CGSize(width: 0, height: -1.0)
+            containerView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
             containerView.layer.shadowRadius = 12.0
-            containerView.layer.shadowOpacity = 0.8
+            containerView.layer.shadowOpacity = 1.0
             containerView.layer.masksToBounds = false
-            containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.layer.bounds, cornerRadius: 12.0).cgPath
+            containerView.layer.shouldRasterize = true
+            containerView.layer.rasterizationScale = UIScreen.main.scale
             
-            bgImageView.layer.cornerRadius = 12.0
+            // Apply rounded corners
+            bgImageView.layer.cornerRadius = Defaults.radius
             bgImageView.layer.masksToBounds = true
+            
+            // Apply bottom rounded corners
+            let maskPath = UIBezierPath(roundedRect: titleView.bounds,
+                                        byRoundingCorners: UIRectCorner.init(arrayLiteral: .bottomLeft, .bottomRight),
+                                        cornerRadii: .init(width: Defaults.radius, height: Defaults.radius))
+            
+            let maskLayer = CAShapeLayer()
+            maskLayer.frame = titleView.bounds
+            maskLayer.path  = maskPath.cgPath
+            titleView.layer.mask = maskLayer
         }
     }
 
     
-    // MAK: - Public Functions
-    func configure(title: String, subTitle: String, image: UIImage, color: UIColor) {
+    // MARK: - Public Functions
+    func configure(title: String, subTitle: String, image: UIImage, color: UIColor?) {
         titleLabel.text = title
         subtitleLabel.text = subTitle
         bgImageView.image = image
         
-        shadowColor = image.averageColor
+        if let color = color { shadowColor = color }
         
         setNeedsLayout()
         layoutIfNeeded()
+    }
+}
+
+private extension ListCell {
+    struct Defaults {
+        static let radius: CGFloat = 12.0
+        static let titleShadowKey = "titleShadowKey"
     }
 }
