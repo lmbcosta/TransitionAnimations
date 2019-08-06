@@ -18,6 +18,8 @@
 		4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908754C22F8D8F400EFD80F /* ListCell.swift */; };
 		4908754F22F8D8F400EFD80F /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4908754D22F8D8F400EFD80F /* ListCell.xib */; };
 		4908755222F8F0D700EFD80F /* UIImage+AverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */; };
+		497415CF22FA0087008ECACC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497415CE22FA0087008ECACC /* CardView.swift */; };
+		497415D222FA009E008ECACC /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497415D122FA009E008ECACC /* CardView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		4908754C22F8D8F400EFD80F /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		4908754D22F8D8F400EFD80F /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AverageColor.swift"; sourceTree = "<group>"; };
+		497415CE22FA0087008ECACC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		497415D122FA009E008ECACC /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 		4908754922F8D62B00EFD80F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				497415D022FA008C008ECACC /* CardView */,
 				4908754B22F8D65200EFD80F /* DetailCell */,
 				4908754A22F8D63D00EFD80F /* ListCell */,
 			);
@@ -136,6 +141,15 @@
 				4908755122F8F0D700EFD80F /* UIImage+AverageColor.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		497415D022FA008C008ECACC /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				497415CE22FA0087008ECACC /* CardView.swift */,
+				497415D122FA009E008ECACC /* CardView.xib */,
+			);
+			path = CardView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +212,7 @@
 			files = (
 				4908753022F8C5BB00EFD80F /* LaunchScreen.storyboard in Resources */,
 				4908754F22F8D8F400EFD80F /* ListCell.xib in Resources */,
+				497415D222FA009E008ECACC /* CardView.xib in Resources */,
 				4908752D22F8C5BB00EFD80F /* Assets.xcassets in Resources */,
 				4908752B22F8C5BB00EFD80F /* Main.storyboard in Resources */,
 			);
@@ -216,6 +231,7 @@
 				4908754E22F8D8F400EFD80F /* ListCell.swift in Sources */,
 				4908754022F8CEEF00EFD80F /* ListDataSource.swift in Sources */,
 				4908752422F8C5BB00EFD80F /* AppDelegate.swift in Sources */,
+				497415CF22FA0087008ECACC /* CardView.swift in Sources */,
 				4908755222F8F0D700EFD80F /* UIImage+AverageColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

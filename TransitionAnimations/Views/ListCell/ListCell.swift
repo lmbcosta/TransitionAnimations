@@ -35,7 +35,7 @@ class ListCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleView: UIView! {
         didSet {
-            titleView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            titleView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         }
     }
     

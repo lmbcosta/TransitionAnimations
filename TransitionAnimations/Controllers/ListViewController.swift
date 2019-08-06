@@ -50,6 +50,8 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        print("Card with index \(indexPath.item) was selected")
+        
         // Get Cell's containerView
         guard let cell = collectionView.cellForItem(at: indexPath) as? ListCell else { return }
         guard let containerSuperView = cell.containerView.superview else { return }
