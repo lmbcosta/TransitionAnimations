@@ -15,4 +15,9 @@ enum Model {
         let image: UIImage
         let color: UIColor?
     }
+    
+    struct Detail {
+        let title: String
+        let subtitle: String
+    }
 }

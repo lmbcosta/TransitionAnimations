@@ -53,10 +53,17 @@ extension ListDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // TODO:
         let model = models[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.identifier, for: indexPath) as! ListCell
-        cell.configure(title: model.title, subTitle: model.subtitle, image: model.image, color: model.color)
+        cell.configure(title: model.title, subTitle: model.subtitle, image: model.image, color: model.color, mode: .card)
+        
+        cell.clipsToBounds = false
+        cell.contentView.clipsToBounds = false
+        cell.cardView?.clipsToBounds = false
+        
+        cell.layer.masksToBounds = false
+        cell.contentView.layer.masksToBounds = false
+        cell.cardView?.layer.masksToBounds = false
         
         return cell
     }

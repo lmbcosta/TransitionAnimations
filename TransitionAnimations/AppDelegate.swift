@@ -17,10 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let listViewController = storyboard.instantiateViewController(withIdentifier: "list-view-controller")
-        let navigationController = UINavigationController(rootViewController: listViewController)
         
         let window = UIWindow()
-        window.rootViewController = navigationController
+        window.rootViewController = listViewController
         self.window = window
         self.window?.makeKeyAndVisible()
 

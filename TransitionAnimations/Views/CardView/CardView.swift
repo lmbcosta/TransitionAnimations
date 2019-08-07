@@ -10,8 +10,16 @@ import UIKit
 
 class CardView: UIView {
     
+    enum CardViewMode {
+        case card
+        case extended
+    }
+    
     // UI
     @IBOutlet private var contentView: UIView!
+    
+    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var bgImageView: UIImageView! {
         didSet { bgImageView.contentMode = .scaleAspectFill }
@@ -41,7 +49,15 @@ class CardView: UIView {
         }
     }
     
-    var shadowColor: UIColor?
+    // Constraints
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    // Properties
+    private var shadowColor = UIColor.black
+    private var mode: CardViewMode = .card
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,36 +69,6 @@ class CardView: UIView {
         loadFromNib()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if let shadowColor = shadowColor {
-            // Apply shadow
-            contentView.layer.shadowColor = shadowColor.cgColor
-            contentView.layer.backgroundColor = UIColor.clear.cgColor
-            contentView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-            contentView.layer.shadowRadius = 12.0
-            contentView.layer.shadowOpacity = 1.0
-            contentView.layer.masksToBounds = false
-            contentView.layer.shouldRasterize = true
-            contentView.layer.rasterizationScale = UIScreen.main.scale
-            
-            // Apply rounded corners
-            bgImageView.layer.cornerRadius = Defaults.radius
-            bgImageView.layer.masksToBounds = true
-            
-            // Apply bottom rounded corners
-            let maskPath = UIBezierPath(roundedRect: titleView.bounds,
-                                        byRoundingCorners: UIRectCorner.init(arrayLiteral: .bottomLeft, .bottomRight),
-                                        cornerRadii: .init(width: Defaults.radius, height: Defaults.radius))
-            
-            let maskLayer = CAShapeLayer()
-            maskLayer.frame = titleView.bounds
-            maskLayer.path  = maskPath.cgPath
-            titleView.layer.mask = maskLayer
-        }
-    }
-    
     // MARK: Private Functions
     private func loadFromNib() {
         Bundle.main.loadNibNamed("CardView", owner: self, options: nil)
@@ -92,21 +78,63 @@ class CardView: UIView {
     }
     
     // MARK: Public Functions
-    func setCard(title: String, subtitle: String, image: UIImage, color: UIColor?) {
+    func setCard(title: String, subtitle: String, image: UIImage, color: UIColor?, mode: CardView.CardViewMode) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         bgImageView.image = image
+        if let color = color { shadowColor = color }
         
-        if let color = color {
-            shadowColor = color
+        self.mode = mode
+        
+        updateCornerRadius(for: mode)
+        updateLayout(for: mode)
+    }
+    
+    func updateLayout(for mode: CardViewMode) {
+        switch mode {
+        case .card:
+            leadingConstraint.constant = Defaults.constraintConstant
+            topConstraint.constant = Defaults.constraintConstant
+            trailingConstraint.constant = Defaults.constraintConstant
+            bottomConstraint.constant = Defaults.constraintConstant
+            showShadow(true)
+        case .extended:
+            leadingConstraint.constant = 0
+            topConstraint.constant = 0
+            trailingConstraint.constant = 0
+            bottomConstraint.constant = 0
+            showShadow(false)
         }
+    }
+    
+    func updateCornerRadius(for mode: CardViewMode) {
+        switch mode {
+        case .card:
+            containerView.layer.cornerRadius = Defaults.radius
+            containerView.layer.masksToBounds = true
+        case .extended:
+            containerView.layer.cornerRadius = 0
+            containerView.layer.masksToBounds = true
+        }
+    }
+}
+
+// MARK: - Private Funtions
+private extension CardView {
+    func showShadow(_ value: Bool) {
+        shadowView.layer.cornerRadius = value ? Defaults.radius : 0
+        shadowView.layer.shadowColor = value ? shadowColor.cgColor : UIColor.clear.cgColor
+        shadowView.layer.shadowOpacity = value ? 1 : 0
+        shadowView.layer.shadowRadius = value ? Defaults.shadowRadius : 0
+        shadowView.layer.shadowOffset = value ? .init(width: -1, height: 3) : .zero
     }
 }
 
 private extension CardView {
     struct Defaults {
-        static let radius: CGFloat = 12.0
-        static let titleShadowKey = "titleShadowKey"
+        static let radius: CGFloat = 16.0
+        static let constraintConstant: CGFloat = 20
+        static let shadowRadius: CGFloat = 10
     }
 }
 

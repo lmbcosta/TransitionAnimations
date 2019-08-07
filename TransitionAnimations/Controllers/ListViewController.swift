@@ -26,11 +26,12 @@ class ListViewController: UIViewController {
             collectionView.isPagingEnabled = true
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    func getSelectedCardView() -> CardView? {
+        guard let indexPath = collectionView.indexPathsForSelectedItems?.first else { return nil }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ListCell else { return nil }
         
-        navigationController?.isNavigationBarHidden = true
+        return cell.cardView
     }
 }
 
@@ -38,7 +39,7 @@ class ListViewController: UIViewController {
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return .init(width: collectionView.bounds.width, height: collectionView.bounds.height)
+        return .init(width: collectionView.bounds.width, height: self.view.bounds.height * 0.7)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -50,13 +51,12 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("Card with index \(indexPath.item) was selected")
-        
-        // Get Cell's containerView
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ListCell else { return }
-        guard let containerSuperView = cell.containerView.superview else { return }
-        
         // Model
         let model = listDataSource.requestModel(for: indexPath.item)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail-view-controller") as? DetailViewController else { return }
+        detailViewController.setModel(model)
+        
+        present(detailViewController, animated: true, completion: nil)
     }
 }
