@@ -27,18 +27,24 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="jLY-Dm-yT5">
+                                <rect key="frame" x="168" y="579.5" width="39" height="37"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="jLY-Dm-yT5" firstAttribute="top" secondItem="kbr-ho-6Rv" secondAttribute="bottom" constant="12" id="9qn-k7-Tw5"/>
                             <constraint firstItem="kbr-ho-6Rv" firstAttribute="width" secondItem="3qd-L5-P6b" secondAttribute="width" constant="1" id="kX9-ka-69S"/>
                             <constraint firstItem="kbr-ho-6Rv" firstAttribute="height" secondItem="3qd-L5-P6b" secondAttribute="height" multiplier="0.7" constant="1" id="lwa-hm-7aH"/>
                             <constraint firstItem="kbr-ho-6Rv" firstAttribute="centerY" secondItem="3qd-L5-P6b" secondAttribute="centerY" id="noY-EE-goc"/>
                             <constraint firstItem="kbr-ho-6Rv" firstAttribute="centerX" secondItem="3qd-L5-P6b" secondAttribute="centerX" id="qgc-Zt-HNY"/>
+                            <constraint firstItem="jLY-Dm-yT5" firstAttribute="centerX" secondItem="kbr-ho-6Rv" secondAttribute="centerX" id="vUW-eC-ZSl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3qd-L5-P6b"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="kbr-ho-6Rv" id="8EC-cY-Vo4"/>
+                        <outlet property="pageControl" destination="jLY-Dm-yT5" id="zXU-SU-Pr1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbn-lb-9Oc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -61,8 +67,8 @@
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="l3f-3R-229" firstAttribute="bottom" secondItem="37E-sk-h61" secondAttribute="bottom" id="4Sg-Fz-yKX"/>
+                            <constraint firstItem="l3f-3R-229" firstAttribute="top" secondItem="4CM-oD-aTl" secondAttribute="top" id="IHG-5Z-dcZ"/>
                             <constraint firstItem="l3f-3R-229" firstAttribute="trailing" secondItem="37E-sk-h61" secondAttribute="trailing" id="Trf-qZ-VyS"/>
-                            <constraint firstItem="l3f-3R-229" firstAttribute="top" secondItem="4CM-oD-aTl" secondAttribute="top" id="ZCr-oS-tuc"/>
                             <constraint firstItem="l3f-3R-229" firstAttribute="leading" secondItem="37E-sk-h61" secondAttribute="leading" id="sPx-68-rn9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="37E-sk-h61"/>

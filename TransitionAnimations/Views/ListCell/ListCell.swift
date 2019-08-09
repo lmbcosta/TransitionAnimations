@@ -22,7 +22,7 @@ class ListCell: UICollectionViewCell {
     }
     
     // MARK: - Public Functions
-    func configure(title: String, subTitle: String, image: UIImage, color: UIColor?, mode: CardView.CardViewMode) {
+    func configure(title: String, subTitle: String, image: UIImage, color: UIColor?, mode: CardView.ViewMode) {
         cardView.setCard(title: title, subtitle: subTitle, image: image, color: color, mode: mode)
         
         layoutIfNeeded()

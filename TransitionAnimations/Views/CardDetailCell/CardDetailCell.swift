@@ -12,7 +12,7 @@ class CardDetailCell: UITableViewCell {
     
     static let identifier = "CardDetailCell"
     
-    private lazy var cardView = CardView()
+    lazy var cardView = CardView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -34,7 +34,7 @@ class CardDetailCell: UITableViewCell {
         cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func configure(title: String, subtitle: String, image: UIImage, color: UIColor?, mode: CardView.CardViewMode) {
+    func configure(title: String, subtitle: String, image: UIImage, color: UIColor?, mode: CardView.ViewMode) {
         cardView.setCard(title: title, subtitle: subtitle, image: image, color: color, mode: mode)
         layoutIfNeeded()
     }

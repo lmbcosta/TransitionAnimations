@@ -11,7 +11,7 @@ import UIKit
 class DetailDataSource: NSObject {
     
     var models = [Model.Detail]()
-    var listModel: Model.List?
+    var listModel: Model.Card?
     
     override init() {
         super.init()
@@ -30,7 +30,7 @@ class DetailDataSource: NSObject {
     private lazy var titles = [
         "Weight of Love",
         "In Time",
-        "TurnLovel",
+        "Turn blue",
         "Fever",
     ]
     
@@ -40,10 +40,6 @@ class DetailDataSource: NSObject {
         "Friends since childhood, Auerbach and Carney founded the group after dropping out of college. After signing with indie label Alive, they released their debut album, The Big Come Up (2002), which earned them a new deal with Fat Possum Records. Over the next decade, the Black Keys built an underground fanbase through extensive touring of small clubs, frequent album releases and music festival appearances, and broad licensing of their songs. Their third album, Rubber Factory (2004), received critical acclaim and boosted the band's profile, eventually leading to a record deal with major label Nonesuch Records in 2006. After self-producing and recording their first four records in makeshift studios, the duo completed Attack & Release (2008) in a professional studio and hired producer Danger Mouse, who subsequently became a frequent collaborator with the band.",
         "The group's commercial breakthrough came in 2010 with Brothers, which along with its popular single \"Tighten Up\", won three Grammy Awards. Their 2011 follow-up El Camino received strong reviews and peaked at number two on the Billboard 200 chart, leading to the first arena concert tour of the band's career, the El Camino Tour. The album and its hit single \"Lonely Boy\" won three Grammy Awards. In 2014, they released their eighth album, Turn Blue, their first number-one record in the US, Canada, and Australia. After completing the Turn Blue Tour in 2015, the duo took a hiatus for several years to work on side projects and produce other artists. They returned in 2019 with their ninth album, Let's Rock.",
     ]
-    
-    func requestModel(for index: Int) -> Model.Detail {
-        return models[index]
-    }
 }
 
 // MARK: - TableViewDataSource
@@ -68,6 +64,8 @@ extension DetailDataSource: UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailCell.identifier, for: indexPath) as! DetailCell
+        cell.clipsToBounds = false
+        cell.contentView.clipsToBounds = false
         let model = models[indexPath.item]
         let isLastOne = indexPath.item + 1 == models.count
         

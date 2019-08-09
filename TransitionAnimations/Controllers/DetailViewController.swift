@@ -19,10 +19,14 @@ class DetailViewController: UIViewController {
             tableView.dataSource = detailDataSource
             tableView.delegate = self
             tableView.separatorStyle = .none
+            tableView.clipsToBounds = false
         }
     }
+
     
     private var detailDataSource = DetailDataSource()
+    private var cardDetailHeight = CGFloat.zero
+    private var cardView: CardView?
     
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
@@ -33,45 +37,48 @@ class DetailViewController: UIViewController {
         return button
     }()
     
+    var shouldHideViews: Bool = false {
+        didSet {
+            tableView.isHidden = shouldHideViews
+            dismissButton.isHidden = shouldHideViews
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool { return true }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //setNeedsStatusBarAppearanceUpdate()
-        
+    
         dismissButton.frame = CGRect(x: view.bounds.maxX - 60, y: 40, width: 40, height: 40)
         dismissButton.layer.cornerRadius = dismissButton.frame.height / 2
         
         view.addSubview(dismissButton)
         view.bringSubviewToFront(dismissButton)
-        
-        
-        
-        
-//        dismissButton.translatesAutoresizingMaskIntoConstraints = false
-//        dismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//        dismissButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-//        dismissButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 40).isActive = true
-//        dismissButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 40).isActive = true
-    }
-    
-    
-    
-    func setModel(_ model: Model.List) {
-        detailDataSource.listModel = model
     }
     
     @objc private func dismissButtonTapped() {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CardDetailCell.identifier, for: IndexPath(item: 0, section: 0)) as? CardDetailCell
+        cardView = cell?.cardView
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setCardDetail(model: Model.Card, height: CGFloat) {
+        detailDataSource.listModel = model
+        cardDetailHeight = height
+    }
+    
+    func getCardViewFrame() -> CGRect? {
+        guard let cardView = cardView else { return nil }
+        
+        let newYOrigin = cardView.frame.origin.y + UIApplication.shared.statusBarFrame.height
+
+        return CGRect(origin: .init(x: cardView.frame.origin.x, y: newYOrigin), size: cardView.frame.size)
     }
 }
 
 // MARK: UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? view.bounds.height * 0.7 : UITableView.automaticDimension
+        return indexPath.section == 0 ? cardDetailHeight : UITableView.automaticDimension
     }
 }

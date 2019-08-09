@@ -9,7 +9,7 @@
 import UIKit
 
 enum Model {
-    struct List {
+    struct Card {
         let title: String
         let subtitle: String
         let image: UIImage

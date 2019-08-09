@@ -23,7 +23,7 @@ class ListDataSource: NSObject {
         "Every man dies, not every man really lives."
     ]
     
-    private var models: [Model.List] = []
+    private var models: [Model.Card] = []
     
     override init() {
         super.init()
@@ -32,7 +32,7 @@ class ListDataSource: NSObject {
         subtitles.shuffle()
         images.shuffle()
         
-        (0..<4).forEach({ models.append(Model.List(title: titles[$0], subtitle: subtitles[$0], image: images[$0], color: images[$0].averageColor)) })
+        (0..<4).forEach({ models.append(Model.Card(title: titles[$0], subtitle: subtitles[$0], image: images[$0], color: images[$0].averageColor)) })
     }
     
     private lazy var images: [UIImage] = {
@@ -41,7 +41,7 @@ class ListDataSource: NSObject {
         return array
     }()
     
-    func requestModel(for index: Int) -> Model.List {
+    func requestModel(for index: Int) -> Model.Card {
         return models[index]
     }
 }

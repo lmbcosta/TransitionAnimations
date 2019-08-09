@@ -32,7 +32,7 @@ class DetailCell: UITableViewCell {
     }
     
     @IBOutlet weak private var separatorView: UIView! {
-        didSet { separatorView.backgroundColor = .darkGray }
+        didSet { separatorView.backgroundColor = .lightGray }
     }
     
     // Constraints

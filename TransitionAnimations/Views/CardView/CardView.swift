@@ -10,7 +10,7 @@ import UIKit
 
 class CardView: UIView {
     
-    enum CardViewMode {
+    enum ViewMode {
         case card
         case extended
     }
@@ -57,7 +57,7 @@ class CardView: UIView {
     
     // Properties
     private var shadowColor = UIColor.black
-    private var mode: CardViewMode = .card
+    private var mode: ViewMode = .card
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -78,7 +78,7 @@ class CardView: UIView {
     }
     
     // MARK: Public Functions
-    func setCard(title: String, subtitle: String, image: UIImage, color: UIColor?, mode: CardView.CardViewMode) {
+    func setCard(title: String, subtitle: String, image: UIImage, color: UIColor?, mode: CardView.ViewMode) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         bgImageView.image = image
@@ -90,7 +90,7 @@ class CardView: UIView {
         updateLayout(for: mode)
     }
     
-    func updateLayout(for mode: CardViewMode) {
+    func updateLayout(for mode: ViewMode) {
         switch mode {
         case .card:
             leadingConstraint.constant = Defaults.constraintConstant
@@ -107,7 +107,7 @@ class CardView: UIView {
         }
     }
     
-    func updateCornerRadius(for mode: CardViewMode) {
+    func updateCornerRadius(for mode: ViewMode) {
         switch mode {
         case .card:
             containerView.layer.cornerRadius = Defaults.radius
@@ -124,9 +124,9 @@ private extension CardView {
     func showShadow(_ value: Bool) {
         shadowView.layer.cornerRadius = value ? Defaults.radius : 0
         shadowView.layer.shadowColor = value ? shadowColor.cgColor : UIColor.clear.cgColor
-        shadowView.layer.shadowOpacity = value ? 1 : 0
+        shadowView.layer.shadowOpacity = value ? 0.7 : 0
         shadowView.layer.shadowRadius = value ? Defaults.shadowRadius : 0
-        shadowView.layer.shadowOffset = value ? .init(width: -1, height: 3) : .zero
+        shadowView.layer.shadowOffset = value ? .init(width: -1, height: 3) : .zero        
     }
 }
 
