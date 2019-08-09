@@ -53,7 +53,7 @@ class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             detailVC.shouldHideViews = true
             
-            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: 0 + UIApplication.shared.statusBarFrame.height, damping: 0.75, springVelocity: 4, then: {
+            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: 0, damping: 0.75, springVelocity: 4, then: {
                 cardView.isHidden = false
                 
                 cardViewClone.removeFromSuperview()

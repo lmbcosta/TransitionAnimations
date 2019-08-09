@@ -9,7 +9,6 @@
 import UIKit
 
 class DetailCell: UITableViewCell {
-    
     static let identifier = "DetailCell"
     
     // UI
@@ -34,15 +33,11 @@ class DetailCell: UITableViewCell {
     @IBOutlet weak private var separatorView: UIView! {
         didSet { separatorView.backgroundColor = .lightGray }
     }
-    
-    // Constraints
-    @IBOutlet weak private var separatorHeightContraint: NSLayoutConstraint!
 
     func configure(title: String, subtitle: String, isLastOne: Bool = false) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         
-        separatorHeightContraint.constant = isLastOne ? 0 : 1
-        layoutIfNeeded()
+        separatorView.backgroundColor = isLastOne ? .white : .lightGray
     }
 }

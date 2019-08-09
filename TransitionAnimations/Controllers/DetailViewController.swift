@@ -19,10 +19,9 @@ class DetailViewController: UIViewController {
             tableView.dataSource = detailDataSource
             tableView.delegate = self
             tableView.separatorStyle = .none
-            tableView.clipsToBounds = false
+            tableView.contentInset.top = -UIApplication.shared.statusBarFrame.height
         }
     }
-
     
     private var detailDataSource = DetailDataSource()
     private var cardDetailHeight = CGFloat.zero
@@ -45,12 +44,10 @@ class DetailViewController: UIViewController {
         return button
     }()
     
-    override var prefersStatusBarHidden: Bool { return true }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        dismissButton.frame = CGRect(x: view.bounds.maxX - 60, y: 40, width: 40, height: 40)
+        dismissButton.frame = CGRect(x: view.bounds.maxX - 70, y: UIApplication.shared.statusBarFrame.height + 10, width: 40, height: 40)
         dismissButton.layer.cornerRadius = dismissButton.frame.height / 2
         
         view.addSubview(dismissButton)
