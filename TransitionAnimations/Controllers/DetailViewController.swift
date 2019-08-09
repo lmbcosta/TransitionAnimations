@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    // UI
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.allowsSelection = false
@@ -23,6 +24,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    // Properties
     private var detailDataSource = DetailDataSource()
     private var cardDetailHeight = CGFloat.zero
     
