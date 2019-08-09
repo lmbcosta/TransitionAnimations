@@ -26,9 +26,17 @@ class DetailViewController: UIViewController {
     
     private var detailDataSource = DetailDataSource()
     private var cardDetailHeight = CGFloat.zero
-    private var cardView: CardView?
     
-    private lazy var dismissButton: UIButton = {
+    var cardView: CardView?
+    
+    var shouldHideViews: Bool = false {
+        didSet {
+            tableView?.isHidden = shouldHideViews
+            dismissButton.isHidden = shouldHideViews
+        }
+    }
+    
+    lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         button.tintColor = .white
@@ -36,13 +44,6 @@ class DetailViewController: UIViewController {
         button.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    var shouldHideViews: Bool = false {
-        didSet {
-            tableView.isHidden = shouldHideViews
-            dismissButton.isHidden = shouldHideViews
-        }
-    }
     
     override var prefersStatusBarHidden: Bool { return true }
     

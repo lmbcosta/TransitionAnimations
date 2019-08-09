@@ -12,13 +12,8 @@ import UIKit
 class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     // Properties
-    private let transitionDuration: TimeInterval = 0.8
-    private let shrinkDuration: TimeInterval = 0.3
-    private let backgroundWhiteView: UIView = {
-       let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
+    private let transitionDuration: TimeInterval = 0.6
+    private let shrinkDuration: TimeInterval = 0.2
     
     var cardModel: Model.Card?
     var transition: Transition = .present
@@ -51,15 +46,6 @@ class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         // Add card view clone to containerView
         containerView.addSubview(cardViewClone)
         
-        // Set white background view and add to card view clone
-        backgroundWhiteView.frame = transition == .present ?
-            cardViewClone.containerView.frame : containerView.frame
-        backgroundWhiteView.layer.cornerRadius = transition.cornerRadius
-        
-        backgroundWhiteView.frame = transition == .present ? cardView.containerView.frame : containerView.frame
-        backgroundWhiteView.layer.cornerRadius = transition.cornerRadius
-        cardViewClone.insertSubview(backgroundWhiteView, at: 0)
-        
         if transition == .present {
             guard let detailVC = toVC as? DetailViewController else { return }
             containerView.addSubview(detailVC.view)
@@ -67,11 +53,12 @@ class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             detailVC.shouldHideViews = true
             
-            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: 0 + UIApplication.shared.statusBarFrame.height, then: {
+            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: 0 + UIApplication.shared.statusBarFrame.height, damping: 0.75, springVelocity: 4, then: {
                 cardView.isHidden = false
-                detailVC.shouldHideViews = false
+                
                 cardViewClone.removeFromSuperview()
                 transitionContext.completeTransition(true)
+                detailVC.shouldHideViews = false
             })
         }
         else {
@@ -80,7 +67,7 @@ class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 cardViewClone.frame = cardViewFrame
             }
             
-            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: convertedFrame.origin.y, then: {
+            applyAnimations(to: cardViewClone, containerView: containerView, yOrigin: convertedFrame.origin.y, damping: 0.6, springVelocity: 2, then: {
                 cardView.isHidden = false
                 transitionContext.completeTransition(true)
             })
@@ -104,8 +91,12 @@ private extension TransitionAnimator {
         return clone
     }
     
-    func applyAnimations(to cardView: CardView, containerView: UIView, yOrigin: CGFloat, then handler: @escaping () -> Void) {
-        //cardView.layoutIfNeeded()
+    func applyAnimations(to cardView: CardView,
+                         containerView: UIView,
+                         yOrigin: CGFloat,
+                         damping: CGFloat,
+                         springVelocity: CGFloat,
+                         then handler: @escaping () -> Void) {
         
         if transition == .present {
             // Contract
@@ -114,7 +105,7 @@ private extension TransitionAnimator {
             }, completion: { _ in
                 cardView.layoutIfNeeded()
                 cardView.updateLayout(for: self.transition.next.cardMode)
-                self.increaseDecrease(cardView: cardView, yOrigin: yOrigin, containerView: containerView, duration: self.transitionDuration - self.shrinkDuration, damping: 0.8, initialSpringVelocity: 4, then: handler)
+                self.increaseDecrease(cardView: cardView, yOrigin: yOrigin, containerView: containerView, duration: self.transitionDuration - self.shrinkDuration, damping: damping, initialSpringVelocity: springVelocity, then: handler)
             })
         }
         else {
@@ -133,14 +124,10 @@ private extension TransitionAnimator {
                           then handler: @escaping () -> Void) {
         
         
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.4, options: [], animations: {
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: initialSpringVelocity, options: [], animations: {
             cardView.transform = .identity
             cardView.frame.origin.y = yOrigin
             cardView.updateCornerRadius(for: self.transition.next.cardMode)
-            
-            self.backgroundWhiteView.layer.cornerRadius = cardView.containerView.layer.cornerRadius
-            self.backgroundWhiteView.frame = self.transition == .present ? containerView.frame : cardView.containerView.frame
-            
             containerView.layoutIfNeeded()
         }, completion: { _ in handler() })
     }
